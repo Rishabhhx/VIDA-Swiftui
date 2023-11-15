@@ -13,8 +13,15 @@ struct VIDA_SwiftuiApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            if UserDefaults.standard.object(forKey: "Status") as? String == "Logedin" {
+                TabBarView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            } else {
+                OnboardingView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            }
+//            TabBarView()
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
